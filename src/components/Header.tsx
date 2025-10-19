@@ -13,7 +13,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className="header">
-      <h1>Chess Game Analyzer</h1>
+      <h1>Chess Game Notes App</h1>
       <nav className="tab-navigation">
         <button 
           className={`tab-button ${activeTab === 'import' ? 'active' : ''}`}

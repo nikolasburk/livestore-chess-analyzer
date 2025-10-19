@@ -1,5 +1,5 @@
 {
-  "name": "livestore-example-standalone-web-todomvc-sync-cf",
+  "name": "livestore-chess-game-notes",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -12,8 +12,7 @@
     "@livestore/wa-sqlite": "1.0.5-dev.2",
     "@overengineering/fps-meter": "0.1.2",
     "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "todomvc-app-css": "2.4.3"
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.13.12",

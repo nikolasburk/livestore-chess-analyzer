@@ -1,11 +1,3 @@
-# TodoMVC Example
+# Chess Game Notes with LiveStore
 
-[Demo](https://web-todomvc-sync-cf.livestore.dev)
-
-## Running locally
-
-```bash
-export VITE_LIVESTORE_SYNC_URL='http://localhost:8787'
-bun
-bun dev
-```
+Demo for a simple chess game note taking app built with [LiveStore](https://livestore.dev).

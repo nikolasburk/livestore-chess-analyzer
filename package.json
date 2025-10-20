@@ -33,7 +33,8 @@
     "node": ">=23.0.0"
   },
   "scripts": {
-    "build": "vite build",
+    "build:dev": "vite build",
+    "build": "VITE_LIVESTORE_SYNC_URL=https://chess-game-notes-ws-server.nikolas-burk.workers.dev vite build",
     "dev": "VITE_LIVESTORE_SYNC_URL=http://localhost:8787 vite --force",
     "dev:backend": "wrangler dev --port 8787",
     "dev:frontend": "VITE_LIVESTORE_SYNC_URL=http://localhost:8787 vite --force",

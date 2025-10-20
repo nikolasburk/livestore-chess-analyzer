@@ -17,6 +17,7 @@ export const tables = {
       pgn: State.SQLite.text({ default: '' }), // Game notation
       notes: State.SQLite.text({ default: '' }), // User's personal notes
       importedAt: State.SQLite.integer({ schema: Schema.DateFromNumber }),
+      userId: State.SQLite.text({ default: '' }), // User's email (for data isolation)
     },
   }),
   // Client documents can be used for local-only state (e.g. form inputs)
@@ -28,6 +29,15 @@ export const tables = {
       importStatus: Schema.String, // 'idle', 'importing', 'success', 'error'
     }),
     default: { id: SessionIdSymbol, value: { activeTab: 'import', lichessUsername: '', importStatus: 'idle' } },
+  }),
+  authState: State.SQLite.clientDocument({
+    name: 'authState',
+    schema: Schema.Struct({
+      email: Schema.optional(Schema.String),
+      token: Schema.optional(Schema.String),
+      isAuthenticated: Schema.Boolean,
+    }),
+    default: { id: SessionIdSymbol, value: { email: undefined, token: undefined, isAuthenticated: false } },
   }),
 }
 
@@ -47,6 +57,7 @@ export const events = {
       createdAt: Schema.Date,
       pgn: Schema.String,
       importedAt: Schema.Date,
+      userId: Schema.String,
     }),
   }),
   gameNotesUpdated: Events.synced({
@@ -67,19 +78,21 @@ export const events = {
         speed: Schema.String,
         createdAt: Schema.Date,
         pgn: Schema.String,
+        userId: Schema.String,
       })),
       importedAt: Schema.Date,
     }),
   }),
   uiStateSet: tables.uiState.set,
+  authStateSet: tables.authState.set,
 }
 
 // Materializers are used to map events to state (https://docs.livestore.dev/reference/state/materializers)
 const materializers = State.SQLite.materializers(events, {
-  'v1.GameImported': ({ id, white, black, winner, timeControl, rated, variant, speed, createdAt, pgn, importedAt }) => 
+  'v1.GameImported': ({ id, white, black, winner, timeControl, rated, variant, speed, createdAt, pgn, importedAt, userId }) => 
     tables.games.insert({ 
       id, white, black, winner, timeControl, rated, variant, speed, createdAt, pgn, 
-      notes: '', importedAt 
+      notes: '', importedAt, userId 
     }),
   'v1.GameNotesUpdated': ({ id, notes }) => 
     tables.games.update({ notes }).where({ id }),

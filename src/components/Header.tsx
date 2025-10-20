@@ -4,7 +4,12 @@ import React from 'react'
 import { uiState$ } from '../livestore/queries.js'
 import { events } from '../livestore/schema.js'
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  userEmail: string
+  onLogout: () => void
+}
+
+export const Header: React.FC<HeaderProps> = ({ userEmail, onLogout }) => {
   const { store } = useStore()
   const { activeTab } = store.useQuery(uiState$)
 
@@ -13,7 +18,15 @@ export const Header: React.FC = () => {
 
   return (
     <header className="header">
-      <h1>Chess Game Notes App</h1>
+      <div className="header-top">
+        <h1>Chess Game Notes App</h1>
+        <div className="user-info">
+          <span className="user-email">{userEmail}</span>
+          <button onClick={onLogout} className="logout-button">
+            Logout
+          </button>
+        </div>
+      </div>
       <nav className="tab-navigation">
         <button 
           className={`tab-button ${activeTab === 'import' ? 'active' : ''}`}

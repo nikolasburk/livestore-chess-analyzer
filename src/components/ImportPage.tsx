@@ -1,12 +1,13 @@
 import { useStore } from '@livestore/react'
 import React, { useState } from 'react'
 
-import { uiState$ } from '../livestore/queries.js'
+import { uiState$, authState$ } from '../livestore/queries.js'
 import { events } from '../livestore/schema.js'
 
 export const ImportPage: React.FC = () => {
   const { store } = useStore()
   const { lichessUsername, importStatus } = store.useQuery(uiState$)
+  const { email } = store.useQuery(authState$)
   const [username, setUsername] = useState(lichessUsername)
 
   const handleImport = async () => {
@@ -54,6 +55,7 @@ export const ImportPage: React.FC = () => {
         speed: game.speed,
         createdAt: new Date(game.createdAt),
         pgn: game.moves || '',
+        userId: email || '', // Add userId field using the current user's email
       }))
       console.log('Transformed games:', transformedGames.length)
 

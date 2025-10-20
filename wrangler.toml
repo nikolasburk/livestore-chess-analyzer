@@ -7,10 +7,14 @@ compatibility_flags = ["nodejs_compat"]
 name = "WEBSOCKET_SERVER"
 class_name = "WebSocketServer"
 
+[[durable_objects.bindings]]
+name = "AUTH_REGISTRY"
+class_name = "AuthRegistry"
+
 [[migrations]]
 tag = "v1"
-new_sqlite_classes = ["WebSocketServer"]
+new_sqlite_classes = ["WebSocketServer", "AuthRegistry"]
 
 [vars]
 # should be set via CF dashboard (as secret)
-# ADMIN_SECRET = "..."
+# JWT_SECRET = "your-jwt-secret-key-here"

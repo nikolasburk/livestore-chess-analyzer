@@ -2,7 +2,7 @@ import { makeDurableObject, makeWorker } from '@livestore/sync-cf/cf-worker'
 // @ts-ignore - bcryptjs types not available in CF Workers
 import bcrypt from 'bcryptjs'
 
-export { AuthRegistry } from './auth-registry.js'
+export { AuthRegistry} from './auth-registry.js'
 
 export class WebSocketServer extends makeDurableObject({
   onPush: async (message) => {
@@ -104,7 +104,7 @@ async function handleAuthRequest(request: Request, env: any): Promise<Response> 
 
   if (path === '/auth/signup' && request.method === 'POST') {
     try {
-      const { email, password } = await request.json()
+      const { email, password } = await request.json() as { email: string, password: string }
 
       // Validate input
       if (!email || !password) {
@@ -158,7 +158,7 @@ async function handleAuthRequest(request: Request, env: any): Promise<Response> 
 
   if (path === '/auth/login' && request.method === 'POST') {
     try {
-      const { email, password } = await request.json()
+      const { email, password } = await request.json() as { email: string, password: string }
 
       // Validate input
       if (!email || !password) {

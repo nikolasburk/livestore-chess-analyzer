@@ -12,9 +12,16 @@ name = "AUTH_REGISTRY"
 class_name = "AuthRegistry"
 
 [[migrations]]
-tag = "v1"
-new_sqlite_classes = ["WebSocketServer", "AuthRegistry"]
+tag = "v2"
+new_sqlite_classes = ["AuthRegistry"]
 
 [vars]
 # should be set via CF dashboard (as secret)
 # JWT_SECRET = "your-jwt-secret-key-here"
+
+[observability]
+[observability.logs]
+enabled = false
+head_sampling_rate = 1
+invocation_logs = true
+persist = true

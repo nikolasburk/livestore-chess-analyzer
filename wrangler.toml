@@ -11,10 +11,10 @@ class_name = "WebSocketServer"
 name = "AUTH_REGISTRY"
 class_name = "AuthRegistry"
 
-[[migrations]]
-tag = "v3"
-deleted_classes = ["WebSocketServer"]
-new_sqlite_classes = ["WebSocketServer"]# Recreate both with SQL
+# [[migrations]]
+# tag = "v3"
+# deleted_classes = ["WebSocketServer"]
+# new_sqlite_classes = ["WebSocketServer"]
 
 [vars]
 

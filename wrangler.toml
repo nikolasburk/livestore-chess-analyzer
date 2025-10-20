@@ -13,7 +13,8 @@ class_name = "AuthRegistry"
 
 [[migrations]]
 tag = "v3"
-new_sqlite_classes = ["WebSocketServer", "AuthRegistry"]  # Recreate both with SQL
+deleted_classes = ["WebSocketServer"]
+new_sqlite_classes = ["WebSocketServer"]# Recreate both with SQL
 
 [vars]
 

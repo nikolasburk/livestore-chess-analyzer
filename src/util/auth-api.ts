@@ -22,13 +22,13 @@ export async function signup(email: string, password: string): Promise<AuthRespo
     body: JSON.stringify({ email, password }),
   })
 
-  const data = await response.json()
+  const data = await response.json() as any
 
   if (!response.ok) {
     throw new Error(data.error || 'Signup failed')
   }
 
-  return data
+  return data as AuthResponse
 }
 
 export async function login(email: string, password: string): Promise<AuthResponse> {
@@ -41,11 +41,11 @@ export async function login(email: string, password: string): Promise<AuthRespon
     body: JSON.stringify({ email, password }),
   })
 
-  const data = await response.json()
+  const data = await response.json() as any
 
   if (!response.ok) {
     throw new Error(data.error || 'Login failed')
   }
 
-  return data
+  return data as AuthResponse
 }

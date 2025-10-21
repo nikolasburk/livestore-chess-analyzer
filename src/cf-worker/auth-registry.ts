@@ -8,7 +8,6 @@ export interface UserCredentials {
 }
 
 export class AuthRegistry extends DurableObject {
-  private users: Map<string, UserCredentials> = new Map()
   
   constructor(ctx: DurableObjectState, env: any) {
     super(ctx, env)
@@ -24,7 +23,6 @@ export class AuthRegistry extends DurableObject {
       createdAt: new Date(userData.createdAt)
     }
   }
-
 
   async createUser(email: string, passwordHash: string): Promise<void> {
     // Check if user already exists
